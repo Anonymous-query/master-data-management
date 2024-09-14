@@ -28,12 +28,18 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
   <link rel="icon" type="image/x-icon" href=""/>
 
   <%block name="header_meta"/>
+  <script type="text/javascript" src="${static.url('js/jquery.min.js')}"></script>
+  <script type="text/javascript" src="${static.url('js/bootstrap/bootstrap.min.js')}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
   
   <script>
     window.baseUrl = "${settings.STATIC_URL | n, js_escaped_string}";
     (function (require) {
       require.config({
-          baseUrl: window.baseUrl
+          baseUrl: window.baseUrl,
+          paths: {
+            jquery: 'js/jquery.min'
+          }
       });
     }).call(this, require || RequireJS.require);
   </script>
@@ -60,8 +66,8 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
         <%block name="bodyextra"/>
     </div>
 
-    <script type="text/javascript" src="${static.url('js/bootstrap/bootstrap.min.js')}"></script>
-    <script type="text/javascript" src="${static.url('js/jquery.min.js')}"></script>
+    
+    
     <%block name="js_extra"/>
 
 </body>

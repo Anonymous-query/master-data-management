@@ -49,3 +49,13 @@ loader = Loader(engine)
 <%def name="get_platform_name()"><%
     return get_value('platform_name', settings.PLATFORM_NAME)
 %></%def>
+
+<%def name="require_module(module_name, class_name)">
+    <script type="text/javascript">
+        (function (require) {
+            require(['${module_name | n, js_escaped_string}'], function (${class_name | n, decode.utf8}) {
+                ${caller.body() | n, decode.utf8}
+            });
+        }).call(this, require || RequireJS.require);
+    </script>
+</%def>

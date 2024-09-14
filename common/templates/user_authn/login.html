@@ -12,6 +12,9 @@
 <%block name="js_extra">
     <script type="text/javascript" src="${static.url('js/authentication-main.js')}"></script>
     <script type="text/javascript" src="${static.url('js/show-password.js')}"></script>
+    <%static:require_module module_name="js/user_authn/login_factory" class_name="LoginFactory">
+        LoginFactory();
+    </%static:require_module>
 </%block>
 
 <div class="container">
@@ -23,7 +26,7 @@
                     <img src="${static.url('images/brand-logos/desktop-dark.png')}" alt="logo" class="desktop-dark">
                 </a>
             </div>
-            <div class="card custom-card">
+            <div class="card custom-card" id="login-container">
                 <div class="card-body p-5">
                     <p class="h5 fw-semibold mb-2 text-center">Sign In</p>
                     <div class="row gy-3">
@@ -47,7 +50,7 @@
                             </div>
                         </div>
                         <div class="col-xl-12 d-grid mt-2">
-                            <a href="index.html" class="btn btn-lg btn-primary">Sign In</a>
+                            <a id="login-action" class="btn btn-lg btn-primary">Sign In</a>
                         </div>
                     </div>
                     <div class="text-center">
