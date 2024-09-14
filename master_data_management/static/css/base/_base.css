@@ -1,0 +1,56 @@
+html {
+  font-family: sans-serif;
+  font-style: normal;
+  line-height: 1em;
+  background: #333; /* Replace theme-color with appropriate hex or rgb value */
+}
+
+body {
+  font-family: sans-serif;
+  font-style: normal;
+  font-size: 16px; /* Replace with actual base font size */
+  line-height: 1em;
+  background: #f5f5f5; /* Replace with actual body background color */
+}
+
+[tabindex="-1"] {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000; /* Replace with actual body color */
+  font: normal 1.2em/1.2em serif;
+  margin: 0;
+}
+
+h1 {
+  color: #000; /* Replace with actual body color */
+  font: normal 2em/1.4em sans-serif;
+  margin-bottom: 24px; /* Replace $baseline*1.5 with an appropriate value */
+  text-align: center;
+}
+
+h2 {
+  color: #999; /* Replace with lighter-base-font-color */
+  font: normal 1.2em/1.2em serif;
+  margin-bottom: 12px; /* Replace $baseline*0.75 with an appropriate value */
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  color: inherit;
+  margin: 0;
+}
+
+span {
+  color: inherit;
+  font: inherit;
+}
+.text-center {
+  text-align: center;
+}

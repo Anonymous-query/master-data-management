@@ -1,0 +1,51 @@
+<%page expression_filter="h"/>
+<%!
+import logging
+import json
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.utils.translation import get_language_bidi
+from mako.exceptions import TemplateLookupException
+
+from common.djangolib.js_utils import js_escaped_string, dump_js_escaped_json
+from common.djangolib.markup import HTML
+from common.djangoapps.site_configuration.helpers import (
+  page_title_breadcrumbs,
+)
+logger = logging.getLogger(__name__)
+%>
+
+<%def name='url(file, raw=False)'><%
+try:
+    url = staticfiles_storage.url(file)
+except:
+    url = file
+## HTML-escaping must be handled by caller
+%>${url | n, decode.utf8}${"?raw" if raw else ""}</%def>
+
+## A language-direction indicator, suitable for use in class="" attributes,
+## for example:
+##
+##      <body class="${dir_rtl()}">
+##
+<%def name="dir_rtl()"><%
+    return 'rtl' if get_language_bidi() else 'ltr'
+%></%def>
+
+<%def name="include(path)"><%
+from django.conf import settings
+from django.template.engine import Engine
+from django.template import TemplateDoesNotExist
+from django.template.loaders.filesystem import Loader
+dirs = settings.DEFAULT_TEMPLATE_ENGINE['DIRS']
+
+engine = Engine(dirs=dirs)
+loader = Loader(engine)
+%>${source | n, decode.utf8}</%def>
+
+<%def name="get_page_title_breadcrumbs(*args)"><%
+    return page_title_breadcrumbs(*args)
+%></%def>
+
+<%def name="get_platform_name()"><%
+    return get_value('platform_name', settings.PLATFORM_NAME)
+%></%def>
