@@ -9,7 +9,7 @@
       username: $("#signin-username"),
       password: $("#signin-password"),
 
-      saveSuccess: function () {
+      loginCompleted: function () {
         this.redirect("/dashboard");
       },
 
@@ -19,7 +19,7 @@
           method: "POST",
           data: data,
           success: function (response) {
-            this.saveSuccess();
+            this.loginCompleted();
           },
           error: function (xhr) {
             LoginValidation.renderErrors("Login Error", [
@@ -53,6 +53,7 @@
       init: function() {
         // Bind form submit event
         $('#login-action').on('click', this.submitForm.bind(this));
+        LoginValidation.clearErrorOnFocus()
       }
     };
     // Initialize the LoginView
