@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
+#TEMP
+from common.djangoapps.user_authn.views import login
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('common.djangoapps.user_authn.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('', include('common.djangoapps.user_authn.urls')),
+    path('dashboard',login.dashboard, name="dashboard"),
 ]
 
 if settings.DEBUG:

@@ -6,25 +6,46 @@
     LoginValidation
   ) {
     let LoginView = {
+      nextUrl: '/dashboard',
+
       username: $("#signin-username"),
       password: $("#signin-password"),
 
-      loginCompleted: function () {
-        this.redirect("/dashboard");
+      authComplete: function (model) {
+        model.redirect(model.nextUrl);
       },
 
-      login: function (data) {
+      saveError: function(error) {
+        let errorCode = 'We couldn\'t sign you in.';
+        let msg;
+        if (error.status === 0) {
+          msg = 'An error has occurred. Check your Internet connection and try again.';
+        } else if (error.status === 500) {
+          msg = 'An error has occurred. Try refreshing the page, or check your Internet connection.'; // eslint-disable-line max-len
+        } else if (error.responseJSON !== undefined && error.responseJSON.error_code === 'inactive-user') {
+          msg = 'In order to sign in, you need to activate your account.';
+        } else if (error.responseJSON !== undefined) {
+          msg = error.responseJSON.value;
+          errorCode = error.responseJSON.error_code;
+        } else {
+          msg = 'An unexpected error has occurred.';
+        }
+        LoginValidation.renderErrors(errorCode, msg);
+      },
+
+      login: function (data, model) {
+        let headers = {'X-CSRFToken': Cookies.get('csrftoken')};
+
         $.ajax({
-          url: "/login", // Update with your login endpoint
+          url: "/api/user/account/login_session/", // Update with your login endpoint
           method: "POST",
           data: data,
+          headers: headers,
           success: function (response) {
-            this.loginCompleted();
+            model.authComplete(model);
           },
-          error: function (xhr) {
-            LoginValidation.renderErrors("Login Error", [
-              "Invalid username or password",
-            ]);
+          error: function (error) {
+            model.saveError(error);
           },
         });
       },
@@ -46,7 +67,8 @@
         let data = this.getFormData();
         let isValid = LoginValidation.liveValidate(event);
         if (isValid) {
-          this.login(data);
+          let model = this
+          this.login(data, model);
         }
       },
 

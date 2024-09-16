@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'common.mdm_django_utils',
     'common.djangoapps.mdmmako.apps.MDMmakoConfig',
     'common.djangoapps.site_configuration',
+    'rest_framework',
     'common.djangoapps.user_authn',
 ]
 
@@ -224,3 +225,18 @@ LANGUAGE_COOKIE_NAME = "mdm-language-preference"
 # Clickjacking protection can be disbaled by setting this to 'ALLOW'
 X_FRAME_OPTIONS = 'DENY'
 
+############### Settings for Django Rate limit #####################
+RATELIMIT_ENABLE = True
+
+RATELIMIT_RATE = '120/m'
+
+##### LOGISTRATION RATE LIMIT SETTINGS #####
+LOGISTRATION_RATELIMIT_RATE = '100/5m'
+LOGISTRATION_PER_EMAIL_RATELIMIT_RATE = '30/5m'
+LOGISTRATION_PER_USERNAME_RATELIMIT_RATE = '30/5m'
+LOGISTRATION_API_RATELIMIT = '20/m'
+LOGIN_AND_REGISTER_FORM_RATELIMIT = '100/5m'
+# RESET_PASSWORD_TOKEN_VALIDATE_API_RATELIMIT = '30/7d'
+# RESET_PASSWORD_API_RATELIMIT = '30/7d'
+
+SHARED_COOKIE_DOMAIN = ''
