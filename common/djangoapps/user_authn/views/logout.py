@@ -15,17 +15,18 @@ class LogoutView(TemplateView):
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
     
-    @property
-    def target(self):
-        target_url = self.request.GET.get('redirect_url') or self.request.GET.get('next')
-        if target_url:
-            target_url = nh3.clean(parse.unquote(parse.quote_plus(target_url)))
-
-        return target_url
-    
     def dispatch(self, request, *args, **kwargs):
         logout(request)
         response = super().dispatch(request, *args, **kwargs)
 
         # delete_logged_in_cookies(response)
         return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'target': '/',
+            'logout_uri': '/logout',
+        })
+
+        return context

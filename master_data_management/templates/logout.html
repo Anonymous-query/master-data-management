@@ -1,12 +1,19 @@
+{% extends "main_django.html" %}
 {% load i18n static %}
 
 {% block title %}{% trans "Signed Out" as tmsg %}{% endblock %}
 
 {% block body %}
-<div class="container">
+
     <h1>You have signed out.</h1>
     <p style="text-align: center; margin-bottom: 20px;">
         If you are not redirected within 5 seconds, click here to go to the home page.
     </p>
-</div>
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/logout.js' %}"></script>
+
+    <div id="iframeContainer" style="visibility: hidden" data-redirect-url="{{ target }}">
+        <iframe src="{{ logout_uris }}"></iframe>
+    </div>
 {% endblock body %}

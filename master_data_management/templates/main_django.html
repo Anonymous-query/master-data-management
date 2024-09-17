@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load i18n static %}
+<html lang="{{LANGUAGE_CODE}}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ platform_name }}{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="" />
+
+        {% block headextra %}{% endblock %}
+    </head>
+
+    <body class="{% block bodyclass %}{% endblock %} lang_{{LANGUAGE_CODE}}">
+
+        <div class="window-wrap" dir="{{LANGUAGE_BIDI|yesno:'rtl,ltr'}}">
+            <div class="content-wrapper" id="content">
+                {% block body %}{% endblock %}
+                {% block bodyextra %}{% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>
