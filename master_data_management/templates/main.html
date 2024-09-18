@@ -85,19 +85,18 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
 
 </head>
 
-<body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${settings.LANGUAGE_CODE}">
+  <body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${settings.LANGUAGE_CODE}">
 
-  
     <div class="content-wrapper main-container" id="content" dir="${static.dir_rtl()}">
         ${next.body()}
         <%block name="bodyextra"/>
     </div>
 
-    
-    
+      
+      
     <%block name="js_extra"/>
 
-</body>
+  </body>
 </html>
 
 <%def name="login_query()">${
