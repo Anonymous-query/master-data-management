@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from common.djangoapps.branding import views
 
 #TEMP
 from common.djangoapps.user_authn.views import login
@@ -24,6 +25,8 @@ from common.djangoapps.user_authn.views import login
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+
+    path('', views.index, name='root'),
     path('', include('common.djangoapps.user_authn.urls')),
     path('dashboard',login.dashboard, name="dashboard"),
 ]

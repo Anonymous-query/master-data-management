@@ -1,0 +1,30 @@
+## mako
+
+<%page expression_filter="h"/>
+
+<%namespace name='static' file='../static_content.html'/>
+<%namespace file='../main.html' import="login_query"/>
+<%!
+from django.urls import reverse
+from django.utils.translation import gettext as _
+from common.djangolib.markup import HTML, Text
+%>
+
+<header class="global-header ${'slim' if course else ''}">
+    <div class="main-header">
+        <div class="hamburger-menu" role="button" aria-label=${_("Options Menu")} aria-expanded="false" aria-controls="mobile-menu" tabindex="0">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        % if user.is_authenticated:
+            <%include file="navbar-authenticated.html"/>
+        % else:
+            <%include file="navbar-not-authenticated.html"/>
+        % endif
+    </div>
+    <div class="mobile-menu hidden" aria-label=${_("More Options")} role="menu" id="mobile-menu"></div>
+</header>
+
+

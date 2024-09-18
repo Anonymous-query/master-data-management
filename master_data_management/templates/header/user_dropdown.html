@@ -1,0 +1,16 @@
+## mako
+<%page expression_filter="h"/>
+<%namespace name='static' file='static_content.html'/>
+
+<%!
+import json
+
+from django.conf import settings
+from django.urls import reverse
+from django.utils.translation import gettext as _
+%>
+
+<%
+self.real_user = getattr(user, 'real_user', user)
+username = self.real_user.username
+%>

@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'common.djangoapps.site_configuration',
     'rest_framework',
     'common.djangoapps.user_authn',
+    'common.djangoapps.branding',
 ]
 
 MIDDLEWARE = [

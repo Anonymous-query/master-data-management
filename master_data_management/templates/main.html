@@ -33,7 +33,21 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
 
   <script type="text/javascript" src="${static.url('js/bootstrap/bootstrap.min.js')}"></script>
   <script type="text/javascript" src="${static.url('js/validate.min.js')}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+  <!-- POPPER JS -->
+  <script type="text/javascript" src="${static.url('libs/popper.min.js')}"></script>
+  <!-- COLOR PICKER JS -->
+  <script type="text/javascript" src="${static.url('libs/simonwep/pickr/pickr.es5.min.js')}"></script>
+
+  <!-- CHOICES JS -->
+  <script type="text/javascript" src="${static.url('libs/choicesjs/public/assets/scripts/choices.min.js')}"></script>
+    
+  <!-- NODE WAVES JS -->
+  <script type="text/javascript" src="${static.url('libs/node-waves/waves.min.js')}"></script>
+  <!-- SWIPER JS -->
+  <script type="text/javascript" src="${static.url('libs/swiper/swiper-bundle.min.js')}"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
   
   <script>
     window.baseUrl = "${settings.STATIC_URL | n, js_escaped_string}";
@@ -55,6 +69,15 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
   <link href="${static.url('icon-fonts/icons.css')}" rel="stylesheet">
   <!-- APP CSS -->
   <link rel="stylesheet" href="${static.url('css/app.css')}" type="text/css" media="all" />
+  <!-- NODE WAVES CSS -->
+  <link rel="stylesheet" href="${static.url('libs/node-waves/waves.min.css')}"> 
+  <!-- COLOR PICKER CSS -->
+  <link rel="stylesheet" href="${static.url('libs/flatpickr/flatpickr.min.css')}">
+  <link rel="stylesheet" href="${static.url('libs/simonwep/pickr/themes/nano.min.css')}">
+  <!-- CHOICES CSS -->
+  <link rel="stylesheet" href="${static.url('libs/choicesjs/public/assets/styles/choices.min.css')}">          
+  <!-- SWIPERJS CSS -->
+  <link rel="stylesheet" href="${static.url('libs/swiper/swiper-bundle.min.css')}">
   <%block name="headextra"/>
   <%block name="head_extra"/>
 
@@ -62,8 +85,9 @@ from common.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
 
 </head>
 
-<body class="${static.dir_rtl()}<%block name='bodyclass'/> lang_${settings.LANGUAGE_CODE}">
+<body class="${static.dir_rtl()} <%block name='bodyclass'/> lang_${settings.LANGUAGE_CODE}">
 
+  
     <div class="content-wrapper main-container" id="content" dir="${static.dir_rtl()}">
         ${next.body()}
         <%block name="bodyextra"/>
